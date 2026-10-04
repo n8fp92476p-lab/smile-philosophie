@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smile Philosophie — Dental Hub</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --dark: #24231f;
+  --primary: #706b5f;
+  --accent: #9a9384;
+  --accent-light: #eeeae2;
+  --background: #f7f6f3;
+  --card: #ffffff;
+  --border: #e2dfd8;
+  --text: #292824;
+  --muted: #77736b;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--text);
+  background: var(--background);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+header {
+  background: var(--dark);
+  color: white;
+  padding: 14px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 3px 12px rgba(0,0,0,.12);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tooth {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: rgba(255,255,255,.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
+}
+
+.brand h1 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.tagline {
+  margin-top: 2px;
+  font-size: .72rem;
+  color: rgba(255,255,255,.65);
+}
+
+.clock {
+  padding: 6px 12px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 8px;
+  background: rgba(255,255,255,.08);
+  font-size: .8rem;
+}
+
+/* MAIN APP */
+.app {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: white;
+  border-right: 1px solid var(--border);
+  padding: 16px 10px;
+}
+
+.nav-label {
+  padding: 10px 10px 6px;
+  font-size: .67rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.nav-item {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 2px;
+  border: 0;
+  border-left: 3px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  text-align: left;
+  font-family: inherit;
+  font-size: .84rem;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.nav-item:hover {
+  background: #f4f2ee;
+}
+
+.nav-item.active {
+  background: var(--accent-light);
+  border-left-color: var(--accent);
+  color: var(--dark);
+}
+
+.dropdown-row {
+  display: flex;
+}
+
+.dropdown-row .nav-item {
+  flex: 1;
+}
+
+.caret {
+  width: 30px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: var(--muted);
+}
+
+.submenu {
+  display: none;
+  margin-left: 14px;
+  padding: 4px 0 6px 8px;
+  border-left: 2px solid var(--border);
+}
+
+.submenu.open {
+  display: block;
+}
+
+.submenu button {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 6px 8px;
+  text-align: left;
+  font-family: inherit;
+  font-size: .76rem;
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.submenu button:hover {
+  background: #f4f2ee;
+  color: var(--text);
+}
+
+/* CONTENT */
+.content {
+  flex: 1;
+  padding: 34px;
+  overflow-y: auto;
+}
+
+.view {
+  display: none;
+}
+
+.view.active {
+  display: block;
+}
+
+.welcome {
+  margin-bottom: 28px;
+}
+
+.welcome h2 {
+  font-size: 2rem;
+  margin-bottom: 6px;
+}
+
+.welcome p {
+  color: var(--muted);
+}
+
+/* DASHBOARD CARDS */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px,1fr));
+  gap: 18px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.04);
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,.08);
+}
+
+.card-icon {
+  font-size: 1.6rem;
+  margin-bottom: 12px;
+}
+
+.card h3 {
+  font-size: 1rem;
+  margin-bottom: 6px;
+}
+
+.card p {
+  color: var(--muted);
+  font-size: .82rem;
+  line-height: 1.45;
+}
+
+/* TOOL PAGE */
+.tool-page {
+  max-width: 850px;
+}
+
+.tool-page h2 {
+  font-size: 1.7rem;
+  margin-bottom: 8px;
+}
+
+.tool-page > p {
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.note-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 12px;
+}
+
+.note-button {
+  padding: 15px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: white;
+  text-align: left;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.note-button:hover {
+  background: var(--accent-light);
+}
+
+/* MOBILE */
+@media(max-width:760px) {
+  .sidebar {
+    width: 64px;
+  }
+
+  .nav-label,
+  .nav-text,
+  .submenu,
+  .caret {
+    display: none;
+  }
+
+  .content {
+    padding: 22px;
+  }
+
+  .tagline {
+    display: none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="brand">
+    <div class="tooth">🦷</div>
+
+    <div>
+      <h1>Smile Philosophie</h1>
+      <div class="tagline">
+        Your practice hub · Everything your team needs
+      </div>
+    </div>
+  </div>
+
+  <div class="clock" id="clock"></div>
+</header>
+
+
+<div class="app">
+
+<nav class="sidebar">
+
+  <div class="nav-label">Home</div>
+
+  <button class="nav-item active"
+          onclick="navigate('dashboard',this)">
+    <span class="nav-text">⌂ &nbsp; Dashboard</span>
+  </button>
+
+
+  <div class="nav-label">Everyday Tools</div>
+
+  <div class="dropdown-row">
+
+    <button class="nav-item"
+            onclick="navigate('clinical',this)">
+      <span class="nav-text">▣ &nbsp; Clinical Notes</span>
+    </button>
+
+    <button class="caret"
+            onclick="toggleNotes()">
+      ▸
+    </button>
+
+  </div>
+
+
+  <div class="submenu" id="notesMenu">
+
+    <button onclick="openNote('Exam')">Exam</button>
+
+    <button onclick="openNote('Hygiene Visit')">
+      Hygiene Visit
+    </button>
+
+    <button onclick="openNote('Operative Restorative')">
+      Operative Restorative
+    </button>
+
+    <button onclick="openNote('Crown Prep & Seat')">
+      Crown Prep & Seat
+    </button>
+
+    <button onclick="openNote('Extraction & Sedation')">
+      Extraction & Sedation
+    </button>
+
+    <button onclick="openNote('Crown Delivery')">
+      Crown Delivery
+    </button>
+
+    <button onclick="openNote('Root Canal Treatment')">
+      Root Canal Treatment
+    </button>
+
+    <button onclick="openNote('Implant Placement')">
+      Implant Placement
+    </button>
+
+  </div>
+
+
+  <button class="nav-item"
+          onclick="navigate('cdt',this)">
+    <span class="nav-text">⌕ &nbsp; CDT Codes</span>
+  </button>
+
+
+  <div class="nav-label">Resources</div>
+
+  <button class="nav-item">
+    <span class="nav-text">＋ &nbsp; Medications</span>
+  </button>
+
+  <button class="nav-item">
+    <span class="nav-text">◎ &nbsp; Patient Education</span>
+  </button>
+
+  <button class="nav-item">
+    <span class="nav-text">↗ &nbsp; Useful Links</span>
+  </button>
+
+</nav>
+
+
+<main class="content">
+
+<section id="dashboard" class="view active">
+
+  <div class="welcome">
+
+    <h2>Welcome to Smile Philosophie</h2>
+
+    <p>
+      Quick access to the tools and resources your team uses every day.
+    </p>
+
+  </div>
+
+
+  <div class="cards">
+
+    <div class="card"
+         onclick="navigate('clinical')">
+
+      <div class="card-icon">📝</div>
+
+      <h3>Clinical Notes</h3>
+
+      <p>
+        Fast templates for exams, hygiene, restorative,
+        crowns, extractions and more.
+      </p>
+
+    </div>
+
+
+    <div class="card"
+         onclick="navigate('cdt')">
+
+      <div class="card-icon">🔎</div>
+
+      <h3>CDT Code Finder</h3>
+
+      <p>
+        Quickly search commonly used dental procedure codes.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="card-icon">💊</div>
+
+      <h3>Medications</h3>
+
+      <p>
+        Quick-reference dental medications and prescribing information.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="card-icon">✓</div>
+
+      <h3>Checklists</h3>
+
+      <p>
+        Common clinical and practice workflows in one place.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="clinical" class="view">
+
+  <div class="tool-page">
+
+    <h2>Clinical Notes</h2>
+
+    <p>
+      Choose a note template.
+    </p>
+
+    <div class="note-list">
+
+      <button class="note-button" onclick="openNote('Exam')">
+        Exam
+      </button>
+
+      <button class="note-button" onclick="openNote('Hygiene Visit')">
+        Hygiene Visit
+      </button>
+
+      <button class="note-button" onclick="openNote('Operative Restorative')">
+        Operative Restorative
+      </button>
+
+      <button class="note-button" onclick="openNote('Crown Prep & Seat')">
+        Crown Prep & Seat
+      </button>
+
+      <button class="note-button" onclick="openNote('Extraction & Sedation')">
+        Extraction & Sedation
+      </button>
+
+      <button class="note-button" onclick="openNote('Crown Delivery')">
+        Crown Delivery
+      </button>
+
+      <button class="note-button" onclick="openNote('Root Canal Treatment')">
+        Root Canal Treatment
+      </button>
+
+      <button class="note-button" onclick="openNote('Implant Placement')">
+        Implant Placement
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="cdt" class="view">
+
+  <div class="tool-page">
+
+    <h2>CDT Code Finder</h2>
+
+    <p>
+      The searchable CDT database will go here in the next stage.
+    </p>
+
+  </div>
+
+</section>
+
+
+<section id="noteView" class="view">
+
+  <div class="tool-page">
+
+    <h2 id="noteTitle">Clinical Note</h2>
+
+    <p>
+      We'll build the interactive note generator here.
+    </p>
+
+  </div>
+
+</section>
+
+</main>
+
+</div>
+
+
+<script>
+
+function navigate(id, button) {
+
+  document.querySelectorAll(".view")
+    .forEach(view => view.classList.remove("active"));
+
+  document.getElementById(id)
+    .classList.add("active");
+
+  document.querySelectorAll(".nav-item")
+    .forEach(item => item.classList.remove("active"));
+
+  if(button)
+    button.classList.add("active");
+}
+
+
+function toggleNotes() {
+
+  const menu =
+    document.getElementById("notesMenu");
+
+  menu.classList.toggle("open");
+}
+
+
+function openNote(name) {
+
+  document.querySelectorAll(".view")
+    .forEach(view => view.classList.remove("active"));
+
+  document.getElementById("noteView")
+    .classList.add("active");
+
+  document.getElementById("noteTitle")
+    .textContent = name;
+}
+
+
+function updateClock() {
+
+  const now = new Date();
+
+  document.getElementById("clock")
+    .textContent =
+      now.toLocaleDateString([], {
+        month:"short",
+        day:"numeric"
+      })
+      + " · "
+      + now.toLocaleTimeString([], {
+        hour:"numeric",
+        minute:"2-digit"
+      });
+}
+
+updateClock();
+
+setInterval(updateClock,1000);
+
+</script>
+
+</body>
+</html>
