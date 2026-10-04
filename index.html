@@ -414,7 +414,173 @@ main{
   color:var(--muted);
   line-height:1.5;
 }
+/* EXAM GENERATOR */
 
+.exam-generator{
+  max-width:950px;
+}
+
+.exam-section{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:20px;
+  margin-bottom:14px;
+  box-shadow:var(--shadow);
+}
+
+.exam-section h3{
+  color:var(--primary);
+  font-size:1rem;
+  margin-bottom:14px;
+}
+
+.choice-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.choice-btn{
+  border:1px solid var(--border);
+  background:white;
+  color:var(--primary);
+  padding:9px 14px;
+  border-radius:7px;
+  font-family:inherit;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.choice-btn:hover{
+  background:var(--accent-light);
+  border-color:var(--accent);
+}
+
+.choice-btn.active{
+  background:var(--primary);
+  color:white;
+  border-color:var(--primary);
+}
+
+.field-label{
+  display:block;
+  margin:14px 0 7px;
+  font-size:.78rem;
+  font-weight:600;
+  color:var(--primary);
+}
+
+.exam-section textarea{
+  width:100%;
+  min-height:85px;
+  resize:vertical;
+  padding:11px 12px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:#fff;
+  color:var(--text);
+  font-family:inherit;
+  font-size:.84rem;
+  line-height:1.45;
+  outline:none;
+}
+
+.exam-section textarea:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(198,161,91,.15);
+}
+
+.check-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(200px,1fr));
+  gap:10px 18px;
+}
+
+.check-grid label,
+.check-option{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:var(--text);
+  font-size:.82rem;
+  cursor:pointer;
+}
+
+.check-grid input,
+.check-option input{
+  accent-color:var(--accent);
+}
+
+.generate-btn{
+  width:100%;
+  border:0;
+  border-radius:9px;
+  padding:13px 18px;
+  margin:5px 0 18px;
+  background:var(--primary);
+  color:white;
+  font-family:inherit;
+  font-size:.9rem;
+  font-weight:700;
+  cursor:pointer;
+  transition:.15s;
+}
+
+.generate-btn:hover{
+  background:var(--ink);
+  box-shadow:0 5px 15px rgba(7,22,43,.18);
+}
+
+.generated-note{
+  background:var(--accent-light);
+  border:1px solid var(--accent);
+  border-radius:12px;
+  padding:18px;
+  margin-bottom:25px;
+}
+
+.generated-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:12px;
+}
+
+.generated-header h3{
+  color:var(--primary);
+}
+
+.generated-header button{
+  border:1px solid var(--accent);
+  border-radius:7px;
+  padding:7px 12px;
+  background:white;
+  color:var(--primary);
+  font-family:inherit;
+  font-weight:600;
+  cursor:pointer;
+}
+
+#examNoteOutput{
+  width:100%;
+  min-height:300px;
+  resize:vertical;
+  padding:14px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:white;
+  color:var(--text);
+  font-family:inherit;
+  font-size:.82rem;
+  line-height:1.55;
+}
+
+@media(max-width:700px){
+  .check-grid{
+    grid-template-columns:1fr;
+  }
+}
 /* RESPONSIVE */
 
 @media(max-width:760px){
@@ -684,11 +850,100 @@ main{
 
 <h2 id="noteTitle">Clinical Note</h2>
 
-<div class="note-panel">
+<div class="exam-generator">
 
-<p>
-The interactive Smile Philosophie note generator will be built here.
-</p>
+  <div class="exam-section">
+    <h3>Exam Type</h3>
+    <div class="choice-row">
+      <button class="choice-btn active" onclick="selectChoice(this,'examType')">Comprehensive Exam</button>
+      <button class="choice-btn" onclick="selectChoice(this,'examType')">Periodic Exam</button>
+      <button class="choice-btn" onclick="selectChoice(this,'examType')">Limited Exam</button>
+    </div>
+  </div>
+
+  <div class="exam-section">
+    <h3>Chief Complaint</h3>
+    <textarea id="chiefComplaint"
+      placeholder="Enter patient's chief complaint..."></textarea>
+  </div>
+
+  <div class="exam-section">
+    <h3>Medical History</h3>
+
+    <label class="check-option">
+      <input type="checkbox" id="medReviewed">
+      Medical history reviewed and updated
+    </label>
+
+    <label class="field-label">Relevant medical history / medications</label>
+    <textarea id="medicalHistory"
+      placeholder="Enter relevant medical history, medications, allergies, or other considerations..."></textarea>
+  </div>
+
+  <div class="exam-section">
+    <h3>Radiographs / Records Reviewed</h3>
+
+    <div class="check-grid">
+      <label><input type="checkbox" value="Bitewings"> Bitewings</label>
+      <label><input type="checkbox" value="Periapicals"> Periapicals</label>
+      <label><input type="checkbox" value="Panoramic radiograph"> Panoramic</label>
+      <label><input type="checkbox" value="CBCT"> CBCT</label>
+      <label><input type="checkbox" value="Clinical photographs"> Clinical Photos</label>
+      <label><input type="checkbox" value="Periodontal charting"> Perio Charting</label>
+    </div>
+  </div>
+
+  <div class="exam-section">
+    <h3>Clinical Examination</h3>
+
+    <label class="field-label">Extraoral / Intraoral Findings</label>
+    <textarea id="clinicalFindings"
+      placeholder="Document pertinent clinical findings..."></textarea>
+
+    <label class="field-label">Periodontal Findings</label>
+    <textarea id="perioFindings"
+      placeholder="Document periodontal findings..."></textarea>
+
+    <label class="field-label">Dental Findings</label>
+    <textarea id="dentalFindings"
+      placeholder="Caries, defective restorations, fractures, missing teeth, etc..."></textarea>
+  </div>
+
+  <div class="exam-section">
+    <h3>Assessment / Diagnosis</h3>
+    <textarea id="diagnosis"
+      placeholder="Enter diagnoses and assessment..."></textarea>
+  </div>
+
+  <div class="exam-section">
+    <h3>Treatment Plan</h3>
+    <textarea id="treatmentPlan"
+      placeholder="Enter recommended treatment and sequencing..."></textarea>
+  </div>
+
+  <div class="exam-section">
+    <h3>Discussion & Consent</h3>
+
+    <div class="check-grid">
+      <label><input type="checkbox" id="optionsDiscussed"> Treatment options discussed</label>
+      <label><input type="checkbox" id="risksDiscussed"> Risks and benefits discussed</label>
+      <label><input type="checkbox" id="questionsAnswered"> Patient questions answered</label>
+      <label><input type="checkbox" id="patientUnderstands"> Patient understands treatment plan</label>
+    </div>
+  </div>
+
+  <button class="generate-btn" onclick="generateExamNote()">
+    Generate Clinical Note
+  </button>
+
+  <div class="generated-note" id="generatedExamNote" style="display:none;">
+    <div class="generated-header">
+      <h3>Generated Note</h3>
+      <button onclick="copyExamNote()">Copy Note</button>
+    </div>
+
+    <textarea id="examNoteOutput" readonly></textarea>
+  </div>
 
 </div>
 
@@ -876,7 +1131,179 @@ document.getElementById("clock").textContent=date+" · "+time;
 updateClock();
 
 setInterval(updateClock,1000);
+let selectedExamType = "Comprehensive Exam";
 
+function selectChoice(button, group) {
+  if (group === "examType") {
+    document.querySelectorAll(".choice-btn").forEach(btn => {
+      btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+    selectedExamType = button.textContent.trim();
+  }
+}
+
+
+function generateExamNote() {
+
+  const chiefComplaint =
+    document.getElementById("chiefComplaint").value.trim();
+
+  const medicalHistory =
+    document.getElementById("medicalHistory").value.trim();
+
+  const clinicalFindings =
+    document.getElementById("clinicalFindings").value.trim();
+
+  const perioFindings =
+    document.getElementById("perioFindings").value.trim();
+
+  const dentalFindings =
+    document.getElementById("dentalFindings").value.trim();
+
+  const diagnosis =
+    document.getElementById("diagnosis").value.trim();
+
+  const treatmentPlan =
+    document.getElementById("treatmentPlan").value.trim();
+
+
+  const records = [];
+
+  document
+    .querySelectorAll("#note .check-grid input[value]:checked")
+    .forEach(box => {
+      records.push(box.value);
+    });
+
+
+  let note = "";
+
+  note += selectedExamType.toUpperCase() + "\n\n";
+
+
+  if (chiefComplaint) {
+    note += "Chief Complaint:\n";
+    note += chiefComplaint + "\n\n";
+  }
+
+
+  if (document.getElementById("medReviewed").checked) {
+    note += "Medical history reviewed and updated.\n";
+  }
+
+  if (medicalHistory) {
+    note += "Relevant Medical History / Medications:\n";
+    note += medicalHistory + "\n";
+  }
+
+  if (
+    document.getElementById("medReviewed").checked ||
+    medicalHistory
+  ) {
+    note += "\n";
+  }
+
+
+  if (records.length > 0) {
+    note += "Records Reviewed:\n";
+    note += records.join(", ") + ".\n\n";
+  }
+
+
+  if (clinicalFindings) {
+    note += "Extraoral / Intraoral Findings:\n";
+    note += clinicalFindings + "\n\n";
+  }
+
+
+  if (perioFindings) {
+    note += "Periodontal Findings:\n";
+    note += perioFindings + "\n\n";
+  }
+
+
+  if (dentalFindings) {
+    note += "Dental Findings:\n";
+    note += dentalFindings + "\n\n";
+  }
+
+
+  if (diagnosis) {
+    note += "Assessment / Diagnosis:\n";
+    note += diagnosis + "\n\n";
+  }
+
+
+  if (treatmentPlan) {
+    note += "Treatment Plan:\n";
+    note += treatmentPlan + "\n\n";
+  }
+
+
+  const discussion = [];
+
+  if (document.getElementById("optionsDiscussed").checked) {
+    discussion.push("Treatment options were discussed");
+  }
+
+  if (document.getElementById("risksDiscussed").checked) {
+    discussion.push("Risks and benefits were reviewed");
+  }
+
+  if (document.getElementById("questionsAnswered").checked) {
+    discussion.push("Patient questions were answered");
+  }
+
+  if (document.getElementById("patientUnderstands").checked) {
+    discussion.push("Patient expressed understanding of the treatment plan");
+  }
+
+
+  if (discussion.length > 0) {
+    note += "Discussion:\n";
+    note += discussion.join(". ") + ".\n";
+  }
+
+
+  if (!note.trim()) {
+    note = "No exam information entered.";
+  }
+
+
+  document.getElementById("examNoteOutput").value = note.trim();
+
+  document.getElementById("generatedExamNote").style.display = "block";
+
+  document.getElementById("generatedExamNote")
+    .scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+}
+
+
+function copyExamNote() {
+
+  const output = document.getElementById("examNoteOutput");
+
+  navigator.clipboard.writeText(output.value).then(() => {
+
+    const button =
+      document.querySelector(".generated-header button");
+
+    const originalText = button.textContent;
+
+    button.textContent = "Copied ✓";
+
+    setTimeout(() => {
+      button.textContent = originalText;
+    }, 1500);
+
+  });
+
+}
 </script>
 
 </body>
