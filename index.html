@@ -1019,6 +1019,101 @@ main{
     </div>
   </div>
 
+  <!-- CLINICAL EXAMINATION -->
+<div class="exam-section">
+
+  <div class="exam-section-heading">
+    <span class="section-number">04</span>
+    <div>
+      <h3>Clinical Examination</h3>
+      <p>Document extraoral and intraoral examination findings</p>
+    </div>
+  </div>
+
+  <label class="field-label">Extraoral / Head & Neck</label>
+  <textarea id="examExtraoral"
+    placeholder="Document facial symmetry, lymph nodes, swelling, lesions, or other extraoral findings..."></textarea>
+
+  <label class="field-label">Intraoral / Soft Tissue</label>
+  <textarea id="examIntraoral"
+    placeholder="Document lips, buccal mucosa, tongue, floor of mouth, palate, oropharynx, gingiva, and other soft-tissue findings..."></textarea>
+
+  <label class="field-label">Dental Findings</label>
+  <textarea id="examDentalFindings"
+    placeholder="Document caries, existing restorations, fractures, missing teeth, mobility, wear, or other dental findings..."></textarea>
+
+</div>
+
+  <!-- RADIOGRAPHIC FINDINGS -->
+<div class="exam-section">
+
+  <div class="exam-section-heading">
+    <span class="section-number">05</span>
+    <div>
+      <h3>Radiographic Findings</h3>
+      <p>Document imaging reviewed and relevant findings</p>
+    </div>
+  </div>
+
+  <label class="field-label">Radiographs Reviewed</label>
+
+  <div class="check-grid">
+    <label><input type="checkbox" value="Bitewings"> Bitewings</label>
+    <label><input type="checkbox" value="Periapicals"> Periapicals</label>
+    <label><input type="checkbox" value="Panoramic"> Panoramic</label>
+    <label><input type="checkbox" value="CBCT"> CBCT</label>
+  </div>
+
+  <label class="field-label">Radiographic Findings</label>
+
+  <textarea id="examRadiographicFindings"
+    placeholder="Document caries, periapical findings, bone levels, impacted teeth, pathology, or other relevant radiographic findings..."></textarea>
+
+</div>
+
+  <!-- PERIODONTAL ASSESSMENT -->
+<div class="exam-section">
+
+  <div class="exam-section-heading">
+    <span class="section-number">06</span>
+    <div>
+      <h3>Periodontal Assessment</h3>
+      <p>Document periodontal health and relevant findings</p>
+    </div>
+  </div>
+
+  <label class="field-label">Periodontal Charting</label>
+
+  <div class="choice-row">
+    <button type="button" class="choice-btn"
+      onclick="selectPerioCharting(this,'Completed')">
+      Completed
+    </button>
+
+    <button type="button" class="choice-btn"
+      onclick="selectPerioCharting(this,'Reviewed')">
+      Reviewed
+    </button>
+
+    <button type="button" class="choice-btn"
+      onclick="selectPerioCharting(this,'Not Indicated')">
+      Not Indicated
+    </button>
+  </div>
+
+  <label class="field-label">Periodontal Findings</label>
+
+  <textarea id="examPerioFindings"
+    placeholder="Document probing depths, bleeding, recession, mobility, furcation involvement, bone loss, plaque/calculus, or other periodontal findings..."></textarea>
+
+  <label class="field-label">Periodontal Diagnosis</label>
+
+  <textarea id="examPerioDiagnosis"
+    placeholder="Document periodontal diagnosis, stage/grade when applicable, and recommended periodontal treatment..."></textarea>
+
+</div>
+
+
   <div class="vitals-grid">
 
     <div>
@@ -1257,6 +1352,18 @@ function selectPain(button, level) {
   } else {
     painDetails.style.display = "none";
   }
+
+  let selectedPerioCharting = "";
+
+function selectPerioCharting(button, value) {
+  const row = button.closest(".choice-row");
+
+  row.querySelectorAll(".choice-btn")
+    .forEach(btn => btn.classList.remove("active"));
+
+  button.classList.add("active");
+  selectedPerioCharting = value;
+}
 }
 function selectChoice(button, group) {
   if (group === "examType") {
