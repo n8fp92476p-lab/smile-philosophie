@@ -1104,6 +1104,118 @@ main{
       <h3>Periodontal Assessment</h3>
       <p>Document periodontal health and relevant findings</p>
     </div>
+
+    <!-- TMJ / NEUROMUSCULAR -->
+<div class="exam-section">
+
+  <div class="exam-section-heading">
+    <span class="section-number">07</span>
+    <div>
+      <h3>TMJ / Neuromuscular</h3>
+      <p>Document temporomandibular joint and muscular findings</p>
+    </div>
+  </div>
+
+  <label class="field-label">TMJ Findings</label>
+
+  <textarea id="examTMJ"
+    placeholder="Document pain, clicking, popping, crepitus, deviation, limited opening, or other TMJ findings..."></textarea>
+
+  <label class="field-label">Muscular Findings</label>
+
+  <textarea id="examMuscular"
+    placeholder="Document tenderness, muscle pain, parafunctional habits, or other neuromuscular findings..."></textarea>
+
+</div>
+<!-- ASSESSMENT & DIAGNOSIS -->
+<div class="exam-section">
+
+  <div class="exam-section-heading">
+    <span class="section-number">08</span>
+    <div>
+      <h3>Assessment & Diagnosis</h3>
+      <p>Document diagnoses and overall clinical assessment</p>
+    </div>
+  </div>
+
+  <label class="field-label">Assessment / Diagnoses</label>
+
+  <textarea id="examDiagnosis"
+    placeholder="Document dental, periodontal, pulpal, periapical, or other relevant diagnoses..."></textarea>
+
+  <label class="field-label">Prognosis</label>
+
+  <div class="choice-row">
+    <button type="button" class="choice-btn"
+      onclick="selectPrognosis(this,'Good')">
+      Good
+    </button>
+
+    <button type="button" class="choice-btn"
+      onclick="selectPrognosis(this,'Fair')">
+      Fair
+    </button>
+
+    <button type="button" class="choice-btn"
+      onclick="selectPrognosis(this,'Guarded')">
+      Guarded
+    </button>
+
+    <button type="button" class="choice-btn"
+      onclick="selectPrognosis(this,'Poor')">
+      Poor
+    </button>
+  </div>
+
+</div>
+
+    <!-- TREATMENT PLAN -->
+<div class="exam-section">
+
+  <div class="exam-section-heading">
+    <span class="section-number">09</span>
+    <div>
+      <h3>Treatment Plan</h3>
+      <p>Document recommended treatment and patient discussion</p>
+    </div>
+  </div>
+
+  <label class="field-label">Recommended Treatment</label>
+
+  <textarea id="examTreatmentPlan"
+    placeholder="Document recommended treatment, sequencing, referrals, and alternatives..."></textarea>
+
+  <label class="field-label">Discussion & Consent</label>
+
+  <div class="check-grid">
+    <label>
+      <input type="checkbox" id="examOptionsDiscussed">
+      Treatment options discussed
+    </label>
+
+    <label>
+      <input type="checkbox" id="examRisksBenefits">
+      Risks and benefits reviewed
+    </label>
+
+    <label>
+      <input type="checkbox" id="examQuestionsAnswered">
+      Patient questions answered
+    </label>
+
+    <label>
+      <input type="checkbox" id="examPatientUnderstands">
+      Patient expressed understanding
+    </label>
+  </div>
+
+  <label class="field-label">Next Visit</label>
+
+  <textarea id="examNextVisit"
+    placeholder="Document planned treatment or follow-up for the next visit..."></textarea>
+
+</div>
+    
   </div>
 
   <label class="field-label">Periodontal Charting</label>
@@ -1366,6 +1478,18 @@ function selectPerioCharting(button, value) {
   button.classList.add("active");
   selectedPerioCharting = value;
 }
+}
+
+  let selectedPrognosis = "";
+
+function selectPrognosis(button, value) {
+  const row = button.closest(".choice-row");
+
+  row.querySelectorAll(".choice-btn")
+    .forEach(btn => btn.classList.remove("active"));
+
+  button.classList.add("active");
+  selectedPrognosis = value;
 }
 function selectChoice(button, group) {
   if (group === "examType") {
