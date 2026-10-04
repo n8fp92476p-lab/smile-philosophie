@@ -849,7 +849,74 @@ main{
 <div class="back" onclick="navigate('clinical')">← Clinical Notes</div>
 
 <h2 id="noteTitle">Clinical Note</h2>
+<div class="exam-generator" id="examGenerator">
 
+  <!-- EXAM TYPE -->
+  <div class="exam-section">
+    <h3>Exam Type</h3>
+
+    <div class="choice-row">
+      <button type="button" class="choice-btn active"
+        onclick="selectExamType(this,'Comprehensive Examination')">
+        Comprehensive
+      </button>
+
+      <button type="button" class="choice-btn"
+        onclick="selectExamType(this,'Periodic Examination')">
+        Periodic
+      </button>
+
+      <button type="button" class="choice-btn"
+        onclick="selectExamType(this,'Limited Examination')">
+        Limited
+      </button>
+    </div>
+  </div>
+
+  <!-- SUBJECTIVE -->
+  <div class="exam-section">
+
+    <div class="exam-section-heading">
+      <span class="section-number">01</span>
+      <div>
+        <h3>Subjective</h3>
+        <p>Patient history and presenting concern</p>
+      </div>
+    </div>
+
+    <label class="field-label">Chief Complaint</label>
+    <textarea id="examChiefComplaint"
+      placeholder="Enter the patient's chief complaint..."></textarea>
+
+    <label class="field-label">Pain Level</label>
+
+    <div class="choice-row pain-row">
+      <button type="button" class="choice-btn active" onclick="selectPain(this,0)">0</button>
+      <button type="button" class="choice-btn" onclick="selectPain(this,1)">1</button>
+      <button type="button" class="choice-btn" onclick="selectPain(this,2)">2</button>
+      <button type="button" class="choice-btn" onclick="selectPain(this,3)">3</button>
+      <button type="button" class="choice-btn" onclick="selectPain(this,4)">4</button>
+      <button type="button" class="choice-btn" onclick="selectPain(this,5)">5</button>
+      <button type="button" class="choice-btn" onclick="selectPain(this,6)">6</button>
+      <button type="button" class="choice-btn" onclick="selectPain(this,7)">7</button>
+      <button type="button" class="choice-btn" onclick="selectPain(this,8)">8</button>
+      <button type="button" class="choice-btn" onclick="selectPain(this,9)">9</button>
+      <button type="button" class="choice-btn" onclick="selectPain(this,10)">10</button>
+    </div>
+
+    <div id="painDetails" style="display:none;">
+      <label class="field-label">History of Present Illness</label>
+      <textarea id="examHPI"
+        placeholder="Location, onset, duration, quality, aggravating/relieving factors, associated symptoms..."></textarea>
+    </div>
+
+    <label class="field-label">Social History</label>
+    <textarea id="examSocialHistory"
+      placeholder="Document relevant tobacco, alcohol, recreational drug use, or other social history..."></textarea>
+
+  </div>
+
+</div>
 <div class="exam-generator">
 
   <div class="exam-section">
@@ -1131,8 +1198,31 @@ document.getElementById("clock").textContent=date+" · "+time;
 updateClock();
 
 setInterval(updateClock,1000);
-let selectedExamType = "Comprehensive Exam";
+let selectedExamType = "Comprehensive Examination";
+let selectedPainLevel = 0;
+function selectExamType(button, type) {
+  document.querySelectorAll("#examGenerator .exam-section:first-child .choice-btn")
+    .forEach(btn => btn.classList.remove("active"));
 
+  button.classList.add("active");
+  selectedExamType = type;
+}
+
+function selectPain(button, level) {
+  document.querySelectorAll(".pain-row .choice-btn")
+    .forEach(btn => btn.classList.remove("active"));
+
+  button.classList.add("active");
+  selectedPainLevel = level;
+
+  const painDetails = document.getElementById("painDetails");
+
+  if (level >= 4) {
+    painDetails.style.display = "block";
+  } else {
+    painDetails.style.display = "none";
+  }
+}
 function selectChoice(button, group) {
   if (group === "examType") {
     document.querySelectorAll(".choice-btn").forEach(btn => {
