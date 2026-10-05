@@ -1105,7 +1105,41 @@ main{
       <p>Document periodontal health and relevant findings</p>
     </div>
 
-    <!-- TMJ / NEUROMUSCULAR -->
+   
+    
+  </div>
+
+  <label class="field-label">Periodontal Charting</label>
+
+  <div class="choice-row">
+    <button type="button" class="choice-btn"
+      onclick="selectPerioCharting(this,'Completed')">
+      Completed
+    </button>
+
+    <button type="button" class="choice-btn"
+      onclick="selectPerioCharting(this,'Reviewed')">
+      Reviewed
+    </button>
+
+    <button type="button" class="choice-btn"
+      onclick="selectPerioCharting(this,'Not Indicated')">
+      Not Indicated
+    </button>
+  </div>
+
+  <label class="field-label">Periodontal Findings</label>
+
+  <textarea id="examPerioFindings"
+    placeholder="Document probing depths, bleeding, recession, mobility, furcation involvement, bone loss, plaque/calculus, or other periodontal findings..."></textarea>
+
+  <label class="field-label">Periodontal Diagnosis</label>
+
+  <textarea id="examPerioDiagnosis"
+    placeholder="Document periodontal diagnosis, stage/grade when applicable, and recommended periodontal treatment..."></textarea>
+
+</div>
+ <!-- TMJ / NEUROMUSCULAR -->
 <div class="exam-section">
 
   <div class="exam-section-heading">
@@ -1215,40 +1249,6 @@ main{
     placeholder="Document planned treatment or follow-up for the next visit..."></textarea>
 
 </div>
-    
-  </div>
-
-  <label class="field-label">Periodontal Charting</label>
-
-  <div class="choice-row">
-    <button type="button" class="choice-btn"
-      onclick="selectPerioCharting(this,'Completed')">
-      Completed
-    </button>
-
-    <button type="button" class="choice-btn"
-      onclick="selectPerioCharting(this,'Reviewed')">
-      Reviewed
-    </button>
-
-    <button type="button" class="choice-btn"
-      onclick="selectPerioCharting(this,'Not Indicated')">
-      Not Indicated
-    </button>
-  </div>
-
-  <label class="field-label">Periodontal Findings</label>
-
-  <textarea id="examPerioFindings"
-    placeholder="Document probing depths, bleeding, recession, mobility, furcation involvement, bone loss, plaque/calculus, or other periodontal findings..."></textarea>
-
-  <label class="field-label">Periodontal Diagnosis</label>
-
-  <textarea id="examPerioDiagnosis"
-    placeholder="Document periodontal diagnosis, stage/grade when applicable, and recommended periodontal treatment..."></textarea>
-
-</div>
-
 
  
 
